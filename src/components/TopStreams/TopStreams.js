@@ -1,12 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import React, { useState, useEffect} from 'react';
 import api from '../../api';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
+function TopStreams () {
 
-function Sidebar(){
-
-
-    const [topStreams, setTopStreams] = useState([]);
+    const [channels, setChannels] = useState([]);
 
     useEffect(() => {
 
@@ -15,7 +13,7 @@ function Sidebar(){
             const result = await api.get("https://api.twitch.tv/helix/streams");
 
             let dataArray = result.data.data;
-            // console.log(dataArray);
+            console.log(dataArray);
             
             let gameIDs = dataArray.map(stream => {
                 return stream.game_id;
@@ -58,7 +56,6 @@ function Sidebar(){
             let finalArray = dataArray.map(stream => {
 
                 stream.gameName = "";
-                stream.truePic = "";
                 stream.login = "";
 
                 gamesNameArray.forEach(name => {
@@ -72,57 +69,62 @@ function Sidebar(){
                     })
                 })
 
+                let newUrl = stream.thumbnail_url 
+                .replace('{width}', "320")
+                .replace('{height}', "180");
+                stream.thumbnail_url = newUrl;
+
                 return stream;
             })
             
-            setTopStreams(finalArray.slice(0,6));
+            setChannels(finalArray);
         }
 
         fetchData();
 
     }, [])
 
-console.log(topStreams);
 
 
-    return (
-        <div className="sidebar">
-            <h2 className="titreSidebar">Chaînes recommandées</h2>
-            <ul className="listeStream">
-                
-                {topStreams.map((stream,index) => (
+    return ( 
 
-                    <Link 
-                    key={index}
-                    className="lien"
-                    to={{
-                        pathname: `/live/${stream.login}`
-                    }}
-                    >
-                    <li key={index} className="containerFlexSidebar">
+        <div>
+           <h1 className="titreGames">Stream les plus populaires</h1>
+           
+            <div className="flexAccueil">
 
-                        <img src={stream.truePic} alt="logo user" className="profilePicRonde"/>
+                {channels.map((channel, index) => (
 
-                        <div className="streamUser">{stream.user_name}</div>
+                    <div key={index} className="carteStream">
 
-                        <div className="viewerRight">
+                        <img src={channel.thumbnail_url} className="imgCarte" alt="jeu"/>
 
-                        <div className="pointRouge"></div>
-                        <div>{stream.viewer_count}</div>
+                        <div className="cardBodyStream">
+                            
+                            <h5 className="titreCartesStream">{channel.user_name}</h5>
+                            <p className="txtStream">Jeu : {channel.gameName}</p>
+
+                            <p className="txtStream viewers">Viewers : {channel.viewer_count}</p>
+
+                        <Link
+                        className="lien"
+                        to={{
+                            pathname: `/live/${channel.login}`
+                        }}
+                        >
+                            <div className="btnCarte">Regarder {channel.user_name}</div>
+                        </Link>
 
                         </div>
 
-                        <div className="gameNameSidebar">{stream.gameName}</div>
 
+                    </div>
 
-                    </li>
-                    </Link>
-                    
                 ))}
 
-            </ul>
+            </div>
         </div>
-    )
+     );
 }
-
-export default Sidebar;
+ 
+export default TopStreams;
