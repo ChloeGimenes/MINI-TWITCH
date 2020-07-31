@@ -107,7 +107,7 @@ console.log(topStreams);
 
                         <div className="viewerRight">
 
-                        <div className="pointRouge"></div>
+                        {/* <div className="pointRouge"></div> */}
                         <div>{stream.viewer_count}</div>
 
                         </div>

@@ -4,6 +4,7 @@ import search from './Search.svg'
 import menuIco from './MenuIco.svg'
 import croix from './Croix.svg'
 import {Link} from 'react-router-dom';
+import HeaderLog from '../../redux/components/headerLog'
 
 function Header(){
 
@@ -93,8 +94,12 @@ function Header(){
                                 <img src={search} alt="icone loupe" className="logoLoupe"/>
                             </button>
                         </Link>
-                        </form>
+                        </form>   
                     </li>
+
+                         <div className="col-2 align-self-end" >
+                            <HeaderLog />
+                        </div>
 
                 </ul>
 

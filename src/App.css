@@ -53,7 +53,9 @@ PARTIE HEADER
 }
 .formSubmit {
   display: flex;
-  flex-shrink: 1;
+  /* flex-shrink: 1; */
+  justify-content: center;
+  margin: 10px;
 }
 .logoLoupe {
   width: 20px;
@@ -87,6 +89,20 @@ PARTIE HEADER
 .menuIco {
   width: 25px;
 }
+
+.header-log {
+  display: flex;
+  align-items: center;
+  height: 50px;
+  color: white;
+  width: 100px;
+}
+
+.header-log-item {
+  margin-left: 40px;
+}
+
+
 @media screen and (max-width: 950px) {
   .liensNav:nth-child(4) {
     width: 550px;
@@ -175,14 +191,15 @@ PARTIE SIDEBAR
   display: flex;
   justify-content: flex-end;
 }
-.pointRouge {
+
+/* .pointRouge {
   width: 5px;
   height: 5px;
   border-radius: 50%;
   margin-top: 6px;
   margin-right: 3px;
   background: crimson;
-}
+} */
 
 
 @media screen and (max-width: 1200px) {
@@ -311,7 +328,7 @@ PARTIE TOPSTREAMS
 .titreCartesStream {
   font-size: 21px;
   white-space: nowrap;
-  overflow: hidden;
+  /* overflow: hidden; */
   text-overflow: ellipsis;
   width: 80%;
   font-weight: 500;
@@ -580,4 +597,10 @@ PARTIE RESULTATS
 }
 .titreResultats {
  padding-top: 50px;
+}
+
+/*/////////// signup ///////*/
+
+.error {
+  color: red;
 }
