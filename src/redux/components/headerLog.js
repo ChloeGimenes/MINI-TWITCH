@@ -18,19 +18,19 @@ class HeaderLog extends Component {
     renderAuthenticationLink = () => {
         if(this.props.isLoggedIn){
             return (
-                <div>
-                    <Link to={"/signout"} className="nav-link">
+                <div className="">
+                    <Link to={"/signout"} className="lien" id="lien-log">
                         Déconnexion
                     </Link>
                 </div>
             )
         } else {
             return (
-                <div className="header-log">
-                    <Link to={"/signin"} className="header-log-item">
+                <div className="list-item-log">
+                    <Link to={"/signin"} className="lien" id="lien-log">
                         Connexion
                     </Link>
-                    <Link to={"/signup"} className="header-log-item">
+                    <Link to={"/signup"} className="lien" id="lien-log">
                         Inscription
                     </Link>
                 </div>
@@ -41,8 +41,8 @@ class HeaderLog extends Component {
     render(){
         return (
            
-               <div className="header-log">
-                    <Link to={"/ressources"} >
+               <div className="list-item-log">
+                    <Link to={"/ressources"} className="lien" id="lien-log">
                         {this.renderFavLabel()}
                     </Link>
 

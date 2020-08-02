@@ -43,11 +43,21 @@ PARTIE HEADER
   color: #fff;
   cursor: pointer;
   text-decoration: none;
+  
 }
 .lien:hover {
   color: #fff;
   text-decoration: none;
 }
+
+.list-item-log {
+display: flex;
+}
+
+#lien-log {
+  margin-left: 30px;
+}
+
 .logo {
   margin-top: 5px;
 }
@@ -90,7 +100,7 @@ PARTIE HEADER
   width: 25px;
 }
 
-.header-log {
+/* .header-log {
   display: flex;
   align-items: center;
   height: 50px;
@@ -100,7 +110,14 @@ PARTIE HEADER
 
 .header-log-item {
   margin-left: 40px;
+  color: white;
+  text-decoration: none;
 }
+
+.header-log-item:hover {
+  color: #fff;
+  text-decoration: none;
+} */
 
 
 @media screen and (max-width: 950px) {
@@ -111,18 +128,39 @@ PARTIE HEADER
 @media screen and (max-width: 900px) {
   .listeMenu {
     flex-direction: column;
-    height: 250px;
+    height: 300px;
     padding-top: 50px;
   }
+
   .liensNav {
     height: 100px;
     background: #6441a4;
     width: 100%;
   }
+
   .liensNav:nth-child(4){
     width: 100%!important;
-    padding: 10px 0 20px 0;
+    padding: 10px 0px 10px 0;
   }
+
+  .list-item-log {
+    display: flex;
+    flex-direction: column;
+    height: 90px;    
+  }
+
+
+
+  #lien-log {
+    margin-left: 0px;
+    margin-bottom: 8px;
+  }
+
+  .logo {
+    margin-top: 0;
+    margin-bottom: 20px;
+  }
+
   .formSubmit {
     justify-content: center;
   }

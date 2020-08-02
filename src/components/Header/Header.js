@@ -97,9 +97,9 @@ function Header(){
                         </form>   
                     </li>
 
-                         <div className="col-2 align-self-end" >
+                    <li  className="liensNav">
                             <HeaderLog />
-                        </div>
+                    </li>
 
                 </ul>
 

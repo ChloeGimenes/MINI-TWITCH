@@ -66,6 +66,7 @@ export function signupUser({ email, password }, history) {
         })
         .catch(error => {
           console.log(error);
+            dispatch(parseError("email déjà existant"))
         });
     };
   }
