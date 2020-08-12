@@ -1,6 +1,8 @@
 import React, { useState, useEffect} from 'react';
 import api from '../../api';
 import { Link } from 'react-router-dom';
+import SideBar from '../SideBar/SideBar';
+
 
 function Games () {
 
@@ -33,9 +35,9 @@ function Games () {
     console.log(games)
 
 
-
     return ( 
         <div>
+            <SideBar />
             <h1 className="titreGames">Jeux les plus populaires</h1>
             <div className="flexAccueil">
                 {games.map((game, index) => (

@@ -23,7 +23,10 @@ mongoose.connection
 //Connection au serveur:
 expressServer.use(morgan('combined'));
 expressServer.use(bodyParser.json({type: '*/*'}));
-expressServer.use(cors());
+expressServer.use(cors({
+    credentials: true,
+    crossorigin: true,
+  }));
 
 const port = 3090;
 const server = http.createServer(expressServer);

@@ -1,5 +1,6 @@
-import { SET_AUTHENTICATION, INCREMENT_ACTION_COUNT, PARSE_ERROR, RESET_ERROR} from './action-types';
+import {REMOVE_WISHLIST, ADD_WISHLIST, GET_ALL_WISH, SET_AUTHENTICATION, INCREMENT_ACTION_COUNT, PARSE_ERROR, RESET_ERROR} from './action-types';
 import axios from "axios";
+// import { authorize } from 'passport';
 
 
 const BASE_URL="http://localhost:3090";
@@ -21,6 +22,7 @@ export function incrementActionCount() {
 };
 }
 
+
 export function signinUser({email, password}, history){
 
     return function(dispatch) {
@@ -32,10 +34,12 @@ export function signinUser({email, password}, history){
 
         })
         .then( (response) => {
-
             localStorage.setItem("token", response.data.token);
             dispatch(setAuthentication(true));
             history.push("/ressources");
+            localStorage.setItem("email", email);
+            window.location.reload();
+
         }).catch((error) => {
             console.log(error);
             dispatch(parseError("identifiants invalides"))
@@ -63,6 +67,9 @@ export function signupUser({ email, password }, history) {
           localStorage.setItem("token", response.data.token);
           dispatch(setAuthentication(true));
           history.push("/ressources");
+          localStorage.setItem("email", email);
+
+        
         })
         .catch(error => {
           console.log(error);
@@ -78,3 +85,27 @@ export function signupUser({ email, password }, history) {
   export function resetError(errorMessage) {
     return {type:RESET_ERROR, payload:errorMessage}
 }
+
+
+
+/*//// WIH LIST ////*/
+  export const getAllWish = payload => async dispatch => {
+    dispatch({
+      type: GET_ALL_WISH,
+      payload: payload.wish
+    });
+  };
+    
+ export const addWishList = payload => async dispatch => {
+     dispatch({
+         type: ADD_WISHLIST,
+         payload: payload.wish
+     })
+ }
+
+ export const deleteWishList = payload => async dispatch => {
+     dispatch({
+         type: REMOVE_WISHLIST,
+         payload: payload.wish
+     })
+ }

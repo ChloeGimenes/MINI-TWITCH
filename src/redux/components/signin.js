@@ -16,7 +16,7 @@ class Signin extends Component {
     render(){
         return (
             <form onSubmit={this.props.handleSubmit(this.handleSubmit)}>
-                <div className="row justify-content-md-center">
+                <div className="row justify-content-md-center form-signin">
                     <h1 className="mt-5">
                         Connexion
                     </h1>
@@ -34,7 +34,7 @@ class Signin extends Component {
                 </div>
                 <div className="row justify-content-md-center">
                     <fieldset className="col-md-4 form-group">
-                        <label className="bmd-label-floating">Email</label>
+                        <label className="bmd-label-floating">Password</label>
                         <Field
                             name={FIELDS.password}
                             component="input"
@@ -44,7 +44,7 @@ class Signin extends Component {
                     </fieldset>
                 </div>
                 <div className="row justify-content-md-center">
-                    <button type="submit" className="btn mt-5 btn-primary btn-raised">
+                    <button type="submit" className="btn mt-5  btn-raised">
                         Connexion
                     </button>
                 </div>

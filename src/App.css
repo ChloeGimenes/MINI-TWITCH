@@ -291,6 +291,7 @@ PARTIE GAMES
   flex-direction: column;
   justify-content: space-evenly;
 }
+
 .btnCarte {
   height: 50px;
   width: 200px;
@@ -641,4 +642,247 @@ PARTIE RESULTATS
 
 .error {
   color: red;
+}
+
+/*////////// contact //////*/
+.container-form-main {
+  overflow: hidden;
+}
+.contact-hr {
+  border-top: 2px solid black;
+}
+.contact-text {
+  margin: 70px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  line-height: 3;
+  
+}
+.contact-text-title {
+  font-size: 30px;
+  font-weight: bold;
+}
+.container-form {
+  display: flex;
+  justify-content: center;
+}
+.contactform {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
+  max-width: 100%;
+  margin: auto 10%;
+  width: 50%;
+  height: 90%;
+  margin-top: 8%;
+  margin-bottom: 15px;
+}
+
+input::placeholder {
+    color: rgb(47, 19, 92);
+    letter-spacing: 0.44em;
+}
+
+
+.contactform input {
+
+  display: flex;
+  outline: none;
+  border: none;
+  text-align: left;
+  font-size: calc(2vh + 0.5vmin);
+  color: rgb(47, 19, 92);
+  width: 80%;
+  margin: 10px;
+  margin-top: 30px;
+  padding: 50px;
+ 
+  outline: 0;
+  background: transparent;
+  border-bottom: 1px solid rgb(47, 19, 92);
+
+
+
+}
+.contactform textarea {
+  display: flex;
+  background: transparent;
+  outline: none;
+  border: 0;
+  font-size: calc(2vh + 0.5vmin);
+  color: rgb(47, 19, 92);
+ 
+  height: 200px;
+  width: 80%;
+  resize: none;
+  padding: 50px;
+  margin: 20px;
+ 
+  outline: 0;
+  background: transparent;
+  border-bottom: 1px solid rgb(47, 19, 92);
+
+
+  /* background-color: #15171af1 */
+}
+
+textarea::placeholder {
+    color: rgb(47, 19, 92);
+    letter-spacing: 0.44em;
+}
+
+.button-send {
+  text-transform: uppercase;
+  color: rgb(20, 21, 22);
+  letter-spacing: 0.44em;
+  border: none;
+  background-color: rgb(255, 255, 255);
+  padding: 35px;
+  font-size: 16px;
+  margin: 15px;
+
+  transition: all .1s ease-in;
+}
+
+.buttons-container {
+    margin-bottom: 25%;
+    margin-top: 8%
+}
+
+.button-send:hover {
+  cursor: pointer;
+  background-color: rgb(41, 43, 46);
+  border: none;
+  color: white;
+  border: 1px solid white;
+  letter-spacing: .6em;
+}
+.container-warning {
+  background-color: rgb(255, 255, 255);
+  margin-top: 100px;
+  margin-bottom: 130px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+button:focus {outline:0;}
+input:focus,
+textarea:focus,
+select:focus {
+  outline-offset: 0px !important;
+  outline: none !important;
+}
+
+/* Change autocomplete styles in WebKit //////////////////////////*/
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+
+-webkit-text-fill-color: white;
+-webkit-box-shadow: 0 0 0px 1000px #15171a inset;
+
+}
+
+
+
+/* MEDIA QUERIES ///*/
+
+@media only screen and (max-width: 700px) {
+  .contactform input {
+    min-width: 100%;
+  }
+}
+
+@media screen and (max-width:559px) {
+
+.contactform {
+  margin-bottom: 40%;
+}
+
+.contactform input {
+  padding: 0;
+  padding-bottom: 15%;
+  font-size: 17px;
+}
+
+.contactform textarea {
+width: 100%;
+padding: 0;
+margin: 30px;
+font-size: 17px;
+
+
+}
+
+.button-send {
+padding: 15px;
+}
+}
+
+
+/*/////// WISH LIST ////////////////////////////////////*/
+
+.WishList {
+  /* background-image: url('./pictures//galaxy.jpg'); */
+  background: rgb(2,0,36);
+background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(110,109,161,1) 71%, rgba(170,177,182,0.8519782913165266) 100%);
+  background-repeat: no-repeat;
+  background-size: cover
+  ;
+}
+
+.titreGamesWish {
+  padding-top: 90px;
+  font-size: 50px;
+  padding-bottom: 50px;
+  color: white;
+  font-weight: 600;
+}
+
+.cartesGamesWish {
+  background-color: #ffffff;
+  height: 480px;
+  width: 280px;
+  margin: 0 30px 30px 0;
+  position: relative;
+  transition: all 0.4s;
+  border-radius: 10px;
+  box-shadow: 2px 11px 36px -16px rgba(0,0,0,0.75);
+}
+
+.cartesGamesWish:hover {
+  transform: translateY(-5px);
+}
+
+
+.titreCartesGamesName {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width:80%;
+  overflow: hidden;
+  font-weight: 600;
+  font-size: 20px;
+  color: #6441a4
+}
+.titreCartesGamesPrice {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width:80%;
+  overflow: hidden;
+  font-weight: 800;
+  font-size: 17px;
+  color: #6441a4
 }

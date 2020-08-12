@@ -21,6 +21,10 @@ module.exports = function (expressServer) {
             res.send({data: "Ceci est du contenu sécurisé"});
         });
 
+        expressServer.get("/ressources/:id", requireToken, function(req, res){
+            res.send({data: "Ceci est du contenu sécurisé"});
+        });
+
         expressServer.post(
             "/signin", 
             requireValidCredentials, 

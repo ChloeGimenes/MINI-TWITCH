@@ -96,7 +96,12 @@ function Header(){
                         </Link>
                         </form>   
                     </li>
-
+                    
+                    <li onClick={hideMenu} className="liensNav">
+                         <Link className="lien" to="/contact">
+                             Contact
+                         </Link>
+                    </li>
                     <li  className="liensNav">
                             <HeaderLog />
                     </li>
