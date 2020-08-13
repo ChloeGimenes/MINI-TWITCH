@@ -70,23 +70,23 @@ app.get('/db', cors(),function(req, res) {
 })
 
 
-/*RETRIEVE A GAME BY ID*/
-app.get('/db/:id', cors(),function(req, res) {
-  const idUrl = req.params.id;
-  connection.query("SELECT * FROM games WHERE id = ?",
-  idUrl,
-  function(err, results) {
-  if (err) {
-    // console.log('Error in the query');
-    // console.log("[mysql error]",err);
-    res.status(500).send(err);
+// /*RETRIEVE A GAME BY ID*/
+// app.get('/db/:id', cors(),function(req, res) {
+//   const idUrl = req.params.id;
+//   connection.query("SELECT * FROM games WHERE id = ?",
+//   idUrl,
+//   function(err, results) {
+//   if (err) {
+//     // console.log('Error in the query');
+//     // console.log("[mysql error]",err);
+//     res.status(500).send(err);
 
-  } else { 
-    res.json(results);
-    console.log('Successful query');
-   }
-  });
-})
+//   } else { 
+//     res.json(results);
+//     console.log('Successful query');
+//    }
+//   });
+// })
 
 
 /*RETRIEVE ALL KIDS CATEGORIE GAMES */
@@ -137,37 +137,8 @@ app.get('/adv', cors(),function(req, res) {
   });
 })
 
-//*/ RETRIEVE ALL PLAYSTATION CATEGORIE GAMES ///*/
-app.get('/ps', cors(),function(req, res) {
-  const idUrl = req.params.id;
-  connection.query("SELECT games_id FROM games_categories WHERE categories_id = 4", function(err, results) {
-  if (err) {
-    // console.log('Error in the query');
-    // console.log("[mysql error]",err);
-    res.status(500).send(err);
 
-  } else { 
-    res.json(results);
-    console.log('Successful query');
-   }
-  });
-})
 
-//*/ RETRIEVE ALL XBOX CATEGORIE GAMES ///*/
-app.get('/xbox', cors(),function(req, res) {
-  const idUrl = req.params.id;
-  connection.query("SELECT games_id FROM games_categories WHERE categories_id = 5", function(err, results) {
-  if (err) {
-    // console.log('Error in the query');
-    // console.log("[mysql error]",err);
-    res.status(500).send(err);
-
-  } else { 
-    res.json(results);
-    console.log('Successful query');
-   }
-  });
-})
 
 //*/ RETRIEVE ALL FAVORIS GAMES ///*/
 app.get('/favoris/:user', cors(),function(req, res) {
@@ -189,25 +160,23 @@ app.get('/favoris/:user', cors(),function(req, res) {
   });
 })
 
-/* commentaires */
-app.post("/comments/:id", cors(), (req, res) => {
-  const formData = req.body;
-  const idUrl = req.params.id;
+// /* commentaires */
+// app.post("/comments/:id", cors(), (req, res) => {
+//   const formData = req.body;
+//   const idUrl = req.params.id;
 
-  connection.query("UPDATE comments SET ? WHERE games.id = ?", [formData, idUrl], (err, results) => {
-    if (err) {
-      res.status(500).send(err);
-    } else {
-      res.sendStatus(200);
-    }
-  });
-});
+//   connection.query("UPDATE comments SET ? WHERE games.id = ?", [formData, idUrl], (err, results) => {
+//     if (err) {
+//       res.status(500).send(err);
+//     } else {
+//       res.sendStatus(200);
+//     }
+//   });
+// });
 
 app.post("/fav", cors(), (req, res) => {
   
-
     console.log(req.body);
-  
   const formData = {
     user: req.body.user,
     games_id: req.body.games_id,

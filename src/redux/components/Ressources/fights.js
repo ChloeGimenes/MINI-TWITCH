@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
 import axios from 'axios';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
@@ -9,6 +10,9 @@ function Fights (props) {
   
     const [allFights, setAllFights] = useState([]);
   
+    const localStorageRes = localStorage.getItem("email");
+    const user = localStorageRes;
+
     useEffect(() => {
       
       const fetchData = async () => {
@@ -21,7 +25,6 @@ function Fights (props) {
               credentials: 'same-origin'
               }
             })
-  
             let gotFights = results.data;
             setAllFights(gotFights);
             if (!results.ok) {
@@ -34,6 +37,53 @@ function Fights (props) {
       }
       fetchData();
     }, []);
+
+  
+    const handleClick = async (fight) => {
+
+      props.dispatch({
+        type: 'ADD_WISHLIST',
+        payload: fight
+        
+      });
+  
+      try {
+          const body = {
+            user : localStorageRes,
+            games_id : fight.id,
+          }
+          let res = await axios.post("http://localhost:3040/fav", body)
+          let {data} = res.data
+  
+  
+      } catch (error) {
+            console.log(error)
+          };
+      };
+     
+  
+    /* CLICK DELETE FAVORIS */
+    const handleClickDelete = async (fight) => {
+      
+      props.dispatch({
+        type: 'REMOVE_WISHLIST',
+        payload: fight
+      })
+
+      
+    try {
+        const user = localStorageRes
+        console.log('click', localStorageRes)
+        let res = await axios.delete(`http://localhost:3040/favd/${user}/${fight.id}`)
+        let {data}= res.data
+  
+        // refreshWisList();
+  
+      } catch (error) {
+        console.log(error)
+      }
+  
+    };
   
     const responsive = {
         desktop: {
@@ -90,6 +140,8 @@ function Fights (props) {
                         <div className="cardBodyGames" >
                           <h4 className="titreCartesGamesName">{fight.name}</h4>
                           <h5 className="titreCartesGamesPrice">{fight.price}&nbsp;€</h5>
+                          <button onClick={()=> handleClick(fight)}>ADD ME IN YOUR FAV !</button>
+                          <button onClick={()=> handleClickDelete(fight)} >DELETE ME</button>
                         </div>
                     </div>
           
@@ -102,4 +154,4 @@ function Fights (props) {
 
 }    
 
-export default Fights;
+export default connect(null, null)(Fights)

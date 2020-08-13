@@ -1,92 +1,15 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 
 
-
 function Favoris (props) {
-  
-    const {wish} = props;
-    
-  const localStorageRes = localStorage.getItem("email");
 
-  
-    // useEffect(() => {
-        
-    //   axios
-    //     .get("http://localhost:3040/fav",  { 
-    //       headers: {
-    //       withCredentials: true,
-    //       credentials: 'same-origin'
-    //       }
-    //     })
-    //     .then(res => res.data)
-    //     .then(data => setAllFav(data));
-        
-    // }, []);
-  
-//  /* GET MY FAVORIS */ 
-//  useEffect(() => {
-      
-//     const fetchData = async () => {
-    
-//      const localStorageRes = localStorage.getItem("email");
-//      const user = localStorageRes;
+    const {wish, allwish} = props;
 
-//      try{
-//        const results = await axios
-//       .get(`http://localhost:3040/favoris/${user}`,  { 
-//         headers: {
-//         withCredentials: true,
-//         credentials: 'same-origin',
-//         'Access-Control-Allow-Credentials' : true,
-//         'Access-Control-Allow-Origin':'*',
-//         'Access-Control-Allow-Methods':'GET',
-//         'Access-Control-Allow-Headers':'application/json',
-//         },
-//       })
-//         let fav = results.data;
-//         setAllFav(fav);
+    console.log('les wish des fav', wish)
 
-//         if (!results.ok) {
-//           throw Error(results.statusText);
-//         }
-//     } catch (error) {
-//       console.log(error)
-//       }
-//     }
-//       fetchData();
-//   }, []);
-
-//   console.log ("les favs !", allFav);
-
-
-// /* REFRESH FAV */  
-// const refreshWisList = async (fav) => {
-//     const user = localStorageRes;
-//     try{
-//       const results = await axios
-//      .get(`http://localhost:3040/favoris/${user}`,  { 
-//        headers: {
-//        withCredentials: true,
-//        credentials: 'same-origin',
-//        'Access-Control-Allow-Credentials' : true,
-//        'Access-Control-Allow-Origin':'*',
-//        'Access-Control-Allow-Methods':'GET',
-//        'Access-Control-Allow-Headers':'application/json',
-//        },
-//      })
-//        let fav = results.data;
-//        setAllFav(fav);
-
-//        if (!results.ok) {
-//          throw Error(results.statusText);
-//        }
-//    } catch (error) {
-//      console.log(error)
-//      }
-//    }
-
+    const localStorageRes = localStorage.getItem("email");
 
   /*CLICK ADD WISHLIST*/
   const handleClick = async (yo) => {
@@ -98,10 +21,8 @@ function Favoris (props) {
         user : localStorageRes,
         games_id : yo.id,
     }
-    let res = await axios.post(`http://localhost:3040/favd/${user}/${yo.id}`, body)
+    let res = await axios.post("http://localhost:3040/fav", body)
     let {data} = res.data
-
-    // refreshWisList();
 
   } catch (error) {
           console.log(error)
@@ -111,20 +32,20 @@ function Favoris (props) {
   
 
   /*CLICK DELETE WISHLIST*/
-  const handleClickDelete = async (yo) => {
+  const handleClickDelete = async (x) => {
+
+    console.log('CONSOLE LOG DE X DES FAV DES Fav', x);
 
     props.dispatch({
       type: 'REMOVE_WISHLIST',
-      payload: yo.id
+      payload: x
     })
 
   try {
       const user = localStorageRes
-      console.log('click', localStorageRes)
-      let res = await axios.delete(`http://localhost:3040/favd/${user}/${yo.id}`)
+      console.log('remove', localStorageRes, x.id)
+      let res = await axios.delete(`http://localhost:3040/favd/${user}/${x.id}`)
       let {data} = res.data;
-
-      // refreshWisList();
 
     } catch (error) {
       console.log(error)
@@ -137,13 +58,36 @@ function Favoris (props) {
   }
 
   console.log('LE WISH RECUPERE', wish)
+
+
+
+  console.log('LE WISH RECUPERE', )
     return (
         <div >
             <h1 className="titreGamesWish">WISH LIST</h1>
                <div className="flexAccueil">
-                {Object.keys(wish).map((fav, i) => (
-                  wish[fav].map((yo =>
-                    <div className="cartesGamesWish" key={i}>
+              
+           { Object.keys(wish).map === 0 ? (
+
+                  Object.keys(wish).map((fav => (
+                    wish[fav].map((yo) => (
+                      yo.map((x, i) =>
+                        <div className="cartesGamesWish" key={i}>
+                            <img src={x.picture} alt="game pic" className="imgCarte" style={style} />
+                           <div className="cardBodyGames"  >
+                             <h4 className="titreCartesGamesName">{x.name}</h4>
+                               <h5 className="titreCartesGamesPrice">{x.price}&nbsp;€</h5>
+                                 <button onClick={()=> handleClick(x)}>ADD ME IN YUR FAV !</button>
+                                 <button onClick={()=> handleClickDelete(x)}>DELETE ME</button>
+                             </div>
+                         </div>
+                      ))))))
+           ) :  (
+            
+            Object.keys(wish).map((fav => (
+              wish[fav].map((yo, i) => (
+
+           <div className="cartesGamesWish" key={i}>
                     <img src={yo.picture} alt="game pic" className="imgCarte" style={style} />
                 <div className="cardBodyGames"  >
                 <h4 className="titreCartesGamesName">{yo.name}</h4>
@@ -152,17 +96,16 @@ function Favoris (props) {
                     <button onClick={()=> handleClickDelete(yo)}>DELETE ME</button>
                 </div>
             </div>
-                    
-                    
-                    ))
-                    
-                    
-                  )
-               )}
+         )
+       ))
+        )
+      )
+    )
+              }   
             </div>
         </div>
-    )
-
+    
+  )
 }    
 
 const mapStateToProps = (state: Object) => {

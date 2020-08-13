@@ -7,6 +7,7 @@ import wishListReducer from "./wishlist";
 
 
 
+
 const rootReducer = combineReducers({
 
     form,
@@ -14,8 +15,7 @@ const rootReducer = combineReducers({
     actionInfo: ActionInfoReducer,
     errors: ErrorsReducer,
     wish: wishListReducer,
-    
- 
+
 });
 
 

@@ -17,7 +17,7 @@ function Ressources (props) {
   const user = localStorageRes;
   
   const [games, setAllGames] = useState([]);
-  const [wish, setAllWish] = useState([]);
+  // const [wish, setAllWish] = useState([]);
 
 
   /* GET ALL GAMES */  
@@ -48,46 +48,51 @@ function Ressources (props) {
     fetchData();
   }, []);
 
-
-
 /* GET ALL MY WISH */         
-  useEffect(() => {
+useEffect(() => {
       
-        const fetchData = async () => {
-        
-         const localStorageRes = localStorage.getItem("email");
-         const user = localStorageRes;
-    
-         try{
-           const results = await axios
-          .get(`http://localhost:3040/favoris/${user}`,  { 
-            headers: {
-            withCredentials: true,
-            credentials: 'same-origin',
-            'Access-Control-Allow-Credentials' : true,
-            'Access-Control-Allow-Origin':'*',
-            'Access-Control-Allow-Methods':'GET',
-            'Access-Control-Allow-Headers':'application/json',
-            },
-          })
-            let fav = results.data;
-            setAllWish(fav);
-    
-            if (!results.ok) {
-              throw Error(results.statusText);
-            }
-        } catch (error) {
-          console.log(error)
-          }
-        }
-          fetchData();
-      }, []);
-    
-props.dispatch({
-  type: 'GET_ALL_WISH',
-  payload: wish
-});
+  const fetchData = async () => {
+  
+   const localStorageRes = localStorage.getItem("email");
+   const user = localStorageRes;
+  
 
+   try{
+     const results = await axios
+    .get(`http://localhost:3040/favoris/${user}`,  { 
+      headers: {
+      withCredentials: true,
+      credentials: 'same-origin',
+      'Access-Control-Allow-Credentials' : true,
+      'Access-Control-Allow-Origin':'*',
+      'Access-Control-Allow-Methods':'GET',
+      'Access-Control-Allow-Headers':'application/json',
+      },
+    })
+      let fav = results.data;
+      let myfav = fav;
+
+      console.log('GET mes FAV au useEffect dans ressources pour les mettre dans le tableau WISH ', myfav)
+
+      props.dispatch({
+        type: 'GET_ALL_WISH',
+        payload: myfav,
+      });
+      
+      if (!results.ok) {
+        throw Error(results.statusText);
+      }
+  } catch (error) {
+    console.log(error)
+    }
+  }
+    fetchData();
+}, []);
+
+// props.dispatch({
+//   type: 'GET_ALL_WISH',
+//   payload: wish
+// });
 
 
   /* CLICK ADD FAVORIS */  
@@ -95,9 +100,10 @@ props.dispatch({
 
     props.dispatch({
       type: 'ADD_WISHLIST',
-      payload: gamed
-      
+      payload: gamed,
     });
+
+    console.log('add', localStorageRes, gamed.id)
 
     try {
         const body = {
@@ -105,10 +111,7 @@ props.dispatch({
           games_id : gamed.id,
         }
         let res = await axios.post("http://localhost:3040/fav", body)
-        let {data} = res.data
-
-        // refreshWisList();
-
+        let {data} = res.data;
     } catch (error) {
           console.log(error)
         };
@@ -124,39 +127,12 @@ props.dispatch({
       let res = await axios.delete(`http://localhost:3040/favd/${user}/${gamed.id}`)
       let {data}= res.data
 
-      // refreshWisList();
-
     } catch (error) {
       console.log(error)
     }
 
   };
 
-//     /* REFRESH FAV */  
-// const refreshWisList = async () => {
-//   const user = localStorageRes;
-//   try{
-//     const results = await axios
-//    .get(`http://localhost:3040/favoris/${user}`,  { 
-//      headers: {
-//      withCredentials: true,
-//      credentials: 'same-origin',
-//      'Access-Control-Allow-Credentials' : true,
-//      'Access-Control-Allow-Origin':'*',
-//      'Access-Control-Allow-Methods':'GET',
-//      'Access-Control-Allow-Headers':'application/json',
-//      },
-//    })
-//      let fav = results.data;
-//      setAllWish(fav);
-
-//      if (!results.ok) {
-//        throw Error(results.statusText);
-//      }
-//  } catch (error) {
-//    console.log(error)
-//    }
-//  }
 
   const responsive = {
     desktop: {
@@ -230,11 +206,11 @@ props.dispatch({
   )
 }
 
-const mapStateToProps = state => {
-  return {
-    wish: state.wish
-  };
-};
+// const mapStateToProps = state => {
+//   return {
+//     wish: state.wish
+//   };
+// };
 
 
 export default connect(null, null)(Ressources);

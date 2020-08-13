@@ -99,13 +99,16 @@ export function signupUser({ email, password }, history) {
  export const addWishList = payload => async dispatch => {
      dispatch({
          type: ADD_WISHLIST,
-         payload: payload.wish
+         payload: payload.wish,
+        
      })
  }
 
  export const deleteWishList = payload => async dispatch => {
      dispatch({
          type: REMOVE_WISHLIST,
-         payload: payload.wish
+         payload: payload.wish,
+        
+
      })
  }

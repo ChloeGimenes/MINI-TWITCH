@@ -886,3 +886,18 @@ background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(110,109,161,1) 71%, r
   font-size: 17px;
   color: #6441a4
 }
+
+.card--icon {
+	color: #781818;
+	margin-right: 1rem;
+}
+.card--icon:hover {
+	cursor: pointer;
+}
+.card--icon__not {
+	color: white;
+	margin-right: 1rem;
+}
+.card--icon__not:hover {
+	cursor: pointer;
+}

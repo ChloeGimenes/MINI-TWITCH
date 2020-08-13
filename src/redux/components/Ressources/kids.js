@@ -1,31 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { connect } from 'react-redux';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
+import FontAwesome from 'react-fontawesome';
 
 
 
 function Kids (props) {
-  
+
+   
     const [allKids, setAllKids] = useState([]);
+    
   
-    // useEffect(() => {
-        
-    //   axios
-    //     .get("http://localhost:3040/kids",  { 
-    //       headers: {
-    //       withCredentials: true,
-    //       credentials: 'same-origin'
-    //       }
-    //     })
-    //     .then(res => res.data)
-    //     .then(data => setAllKids(data));
-        
-    // }, []);
+    const localStorageRes = localStorage.getItem("email");
+    const user = localStorageRes;
 
     useEffect(() => {
-      
-        const fetchData = async () => {
+       
+      const fetchData = async () => {
     
           try {
             const results = await axios
@@ -49,7 +42,50 @@ function Kids (props) {
         fetchData();
       }, []);
 
-  
+
+      const handleClick = async (kids) => {
+        
+          props.dispatch({
+          type: 'ADD_WISHLIST',
+          payload: kids
+        });
+        try {
+            const body = {
+              user : localStorageRes,
+              games_id : kids.id,
+            }
+            let res = await axios.post("http://localhost:3040/fav", body)
+            let {data} = res.data
+    
+        } catch (error) {
+              console.log(error)
+            };
+        };
+       
+    
+      /* CLICK DELETE FAVORIS */
+      const handleClickDelete = async (kids) => {
+ 
+       props.dispatch({
+          type: 'REMOVE_WISHLIST',
+          payload: kids
+        })
+
+      try {
+          const user = localStorageRes
+          console.log('click', localStorageRes)
+          let res = await axios.delete(`http://localhost:3040/favd/${user}/${kids.id}`)
+          let {data}= res.data
+    
+          // refreshWisList();
+    
+        } catch (error) {
+          console.log(error)
+        }
+    
+      };
+
+//*/CAROUSEL*/////
     const responsive = {
         desktop: {
           breakpoint: { max: 3000, min: 1024 },
@@ -72,12 +108,16 @@ function Kids (props) {
         height: '350px',
         width: '280px',
       }
+    
+        // const wishId = Object.keys(wish).map((fav => (
+        //   wish[fav].map((yo, i) => yo.id ))));
+
+        //   console.log('KIDS WISH', wishId)
 
     return (
 
         <div>
             <h1 className="titreGamesWish">KIDS</h1>
-            
                 <Carousel
         sliderClass=""
         slidesToSlide={1}
@@ -101,20 +141,38 @@ function Kids (props) {
             
                 {allKids.map((kids, index) => (
                     <div className="cartesGamesWish" key={index}>
-                            <img src={kids.picture} alt="game pic" className="imgCarte" style={style}/>
+                      <img src={kids.picture} alt="game pic" className="imgCarte" style={style}/>
                         <div className="cardBodyGames" >
                           <h4 className="titreCartesGamesName">{kids.name}</h4>
                             <h5 className="titreCartesGamesPrice">{kids.price}&nbsp;€</h5>
+
+                           {/* {  
+                                 wishId === kids.id ? (
+                              
+                              <button onClick={()=> handleClickDelete(kids)} >DELETE ME</button>
+                            ) : 
+                            (
+                              <button onClick={()=> handleClick(kids)}>ADD ME IN YOUR FAV !</button>
+                            )
+                            } */}
+
                         </div>
                     </div>
           
                 ))}
                 
-           </Carousel>
-            
+           </Carousel> 
         </div>
     )
 
 }    
 
-export default Kids;
+
+const mapStateToProps = state => {
+  return {
+    wish: state.wish
+  };
+};
+
+
+export default connect(mapStateToProps)(Kids);
