@@ -38,8 +38,7 @@ export function signinUser({email, password}, history){
             dispatch(setAuthentication(true));
             history.push("/ressources");
             localStorage.setItem("email", email);
-            window.location.reload();
-
+            
         }).catch((error) => {
             console.log(error);
             dispatch(parseError("identifiants invalides"))

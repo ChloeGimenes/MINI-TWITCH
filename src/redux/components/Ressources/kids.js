@@ -117,7 +117,7 @@ function Kids (props) {
     return (
 
         <div>
-            <h1 className="titreGamesWish">KIDS</h1>
+            <h3 className="subtitreGamesWish">KIDS</h3>
                 <Carousel
         sliderClass=""
         slidesToSlide={1}
@@ -144,18 +144,9 @@ function Kids (props) {
                       <img src={kids.picture} alt="game pic" className="imgCarte" style={style}/>
                         <div className="cardBodyGames" >
                           <h4 className="titreCartesGamesName">{kids.name}</h4>
-                            <h5 className="titreCartesGamesPrice">{kids.price}&nbsp;€</h5>
-
-                           {/* {  
-                                 wishId === kids.id ? (
-                              
+                            <h5 className="titreCartesGamesPrice">{kids.price}&nbsp;€</h5> 
                               <button onClick={()=> handleClickDelete(kids)} >DELETE ME</button>
-                            ) : 
-                            (
                               <button onClick={()=> handleClick(kids)}>ADD ME IN YOUR FAV !</button>
-                            )
-                            } */}
-
                         </div>
                     </div>
           

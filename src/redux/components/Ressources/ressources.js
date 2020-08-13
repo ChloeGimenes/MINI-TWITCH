@@ -7,6 +7,7 @@ import Fights from './fights';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import FontAwesome from 'react-fontawesome';
+import logo3 from '../pictures/twitchcat.png'
 
 
 function Ressources (props) {
@@ -138,12 +139,12 @@ useEffect(() => {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
       items: 5,
-      slidesToSlide: 3
+      slidesToSlide: 1
     },
     tablet: {
       breakpoint: { max: 1024, min: 464 },
       items: 2,
-      slidesToSlide: 2
+      slidesToSlide: 1
     },
     mobile: {
       breakpoint: { max: 464, min: 0 },
@@ -161,7 +162,9 @@ useEffect(() => {
         return (
         <div className="WishList">
             <div>
-              <h1 className="titreGamesWish">CATALOGUE NOUVEAUTES</h1>
+              <img src={logo3} alt="logo catalogue" className="logo-cat"/>
+              <h1 className="titreGamesWish">CATALOGUE JEUX</h1>
+              <h3 className="subtitreGamesWish" >NOUVEAUTES</h3>
               <Carousel
                 sliderClass=""
                 slidesToSlide={1}

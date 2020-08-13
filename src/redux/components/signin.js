@@ -15,9 +15,9 @@ class Signin extends Component {
 
     render(){
         return (
-            <form onSubmit={this.props.handleSubmit(this.handleSubmit)}>
+            <form onSubmit={this.props.handleSubmit(this.handleSubmit)} className="form-container">
                 <div className="row justify-content-md-center form-signin">
-                    <h1 className="mt-5">
+                    <h1 className="form-title">
                         Connexion
                     </h1>
                 </div>

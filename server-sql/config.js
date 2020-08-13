@@ -70,25 +70,6 @@ app.get('/db', cors(),function(req, res) {
 })
 
 
-// /*RETRIEVE A GAME BY ID*/
-// app.get('/db/:id', cors(),function(req, res) {
-//   const idUrl = req.params.id;
-//   connection.query("SELECT * FROM games WHERE id = ?",
-//   idUrl,
-//   function(err, results) {
-//   if (err) {
-//     // console.log('Error in the query');
-//     // console.log("[mysql error]",err);
-//     res.status(500).send(err);
-
-//   } else { 
-//     res.json(results);
-//     console.log('Successful query');
-//    }
-//   });
-// })
-
-
 /*RETRIEVE ALL KIDS CATEGORIE GAMES */
 app.get('/kids', cors(),function(req, res) {
   const idUrl = req.params.id;
@@ -136,8 +117,6 @@ app.get('/adv', cors(),function(req, res) {
    }
   });
 })
-
-
 
 
 //*/ RETRIEVE ALL FAVORIS GAMES ///*/
@@ -211,11 +190,6 @@ app.delete("/favd/:user/:id", cors(), (req, res) => {
     }
   });
 });
-
-
-
-/*/// */////////////////////////////////////////////
-
 
 
 

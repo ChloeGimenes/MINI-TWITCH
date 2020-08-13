@@ -791,8 +791,8 @@ select:-webkit-autofill,
 select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
 
--webkit-text-fill-color: white;
--webkit-box-shadow: 0 0 0px 1000px #15171a inset;
+-webkit-text-fill-color: rgb(15, 15, 15);
+-webkit-box-shadow: 0 0 0px 1000px #f1f1f1 inset;
 
 }
 
@@ -845,11 +845,21 @@ background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(110,109,161,1) 71%, r
 }
 
 .titreGamesWish {
-  padding-top: 90px;
-  font-size: 50px;
+  padding-top: 20px;
+  font-size: 55px;
   padding-bottom: 50px;
   color: white;
-  font-weight: 600;
+  font-weight: 700;
+  letter-spacing: 7px;
+}
+
+.subtitreGamesWish {
+  padding-top: 65px;
+  font-size: 40px;
+  padding-bottom: 50px;
+  color: white;
+  font-weight: 400;
+  letter-spacing: 7px;
 }
 
 .cartesGamesWish {
@@ -900,4 +910,34 @@ background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(110,109,161,1) 71%, r
 }
 .card--icon__not:hover {
 	cursor: pointer;
+}
+
+/*/ SIGN OUT */
+
+.signout-text {
+  margin-top: 20%;
+  color: #6441a4;
+}
+
+.logo2 {
+  margin-top: 15%;
+}
+
+.logo-cat {
+
+  margin-top: 8%;
+  height: 150px;
+
+}
+
+/*/SIGN IN */
+
+.form-title {
+margin-top: 10%;
+}
+
+.btn {
+  color: white;
+  background-color: #6441a4
+
 }

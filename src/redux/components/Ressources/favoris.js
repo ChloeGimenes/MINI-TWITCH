@@ -64,7 +64,7 @@ function Favoris (props) {
   console.log('LE WISH RECUPERE', )
     return (
         <div >
-            <h1 className="titreGamesWish">WISH LIST</h1>
+            <h1 className="subtitreGamesWish">MA LISTE DE SOUHAITS</h1>
                <div className="flexAccueil">
               
            { Object.keys(wish).map === 0 ? (

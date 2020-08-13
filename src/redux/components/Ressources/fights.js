@@ -111,7 +111,7 @@ function Fights (props) {
     return (
 
         <div>
-            <h1 className="titreGamesWish">COMBAT</h1>
+            <h3 className="subtitreGamesWish">COMBAT</h3>
             
                 <Carousel
         sliderClass=""

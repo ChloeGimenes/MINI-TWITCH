@@ -35,8 +35,8 @@ class Signup extends Component {
 
     return (
       <form onSubmit={handleSubmit(this.handleSubmit)}>
-        <div className="row justify-content-md-center">
-          <h1 className="mt-5">Inscription</h1>
+        <div className="row justify-content-md-center ">
+          <h1 className="form-title mb-5">Inscription</h1>
         </div>
         <Field
           name={FIELDS.email}
@@ -57,7 +57,7 @@ class Signup extends Component {
           label="Mot de passe (répétez)"
         />
         <div className="row justify-content-md-center">
-          <button type="submit" className="btn btn-primary btn-raised">
+          <button type="submit" className="btn btn-raised">
             Inscription
           </button>
         </div>
