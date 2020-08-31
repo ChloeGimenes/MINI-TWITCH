@@ -9,7 +9,7 @@ class HeaderLog extends Component {
 
     renderFavLabel = () => {
         if(this.props.isLoggedIn){
-            return "Favoris"
+            return "Catalogue"
         } else {
             return " "
         }

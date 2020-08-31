@@ -140,8 +140,8 @@ function Fights (props) {
                         <div className="cardBodyGames" >
                           <h4 className="titreCartesGamesName">{fight.name}</h4>
                           <h5 className="titreCartesGamesPrice">{fight.price}&nbsp;€</h5>
-                          <button onClick={()=> handleClick(fight)}>ADD ME IN YOUR FAV !</button>
-                          <button onClick={()=> handleClickDelete(fight)} >DELETE ME</button>
+                          <button className="button-add" onClick={()=> handleClick(fight)}>ADD ME!</button>
+                          {/* <button onClick={()=> handleClickDelete(fight)} >DELETE ME</button> */}
                         </div>
                     </div>
           

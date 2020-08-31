@@ -5,8 +5,8 @@ const express = require('express');
 const { useParams } = require("react-router-dom");
 const UserModel = require("../server/models/user");
 const app = express();
-LocalStorage = require('node-localstorage').LocalStorage,
-localStorage = new LocalStorage('./scratch');
+// LocalStorage = require('node-localstorage').LocalStorage,
+// localStorage = new LocalStorage('./scratch');
 
 const connection = mysql.createConnection({
   host: 'localhost',
@@ -64,7 +64,6 @@ app.get('/db', cors(),function(req, res) {
   } else { 
     res.json(results);
     console.log('Successful query DU GET');
-    
    }
   });
 })
@@ -126,7 +125,7 @@ app.get('/favoris/:user', cors(),function(req, res) {
 
   console.log(req.params.user)
 
-  connection.query(`SELECT * FROM games g JOIN favoris f ON g.id = games_id WHERE f.user = '${req.params.user}'` , us, function(err, results) {
+  connection.query(`SELECT * FROM games g JOIN favoris f ON g.id = games_id WHERE f.user = '${us}'` , us, function(err, results) {
   if (err) {
     console.log('Error in the query GET FAVORIS');
     // console.log("[mysql error]",err);
@@ -139,19 +138,6 @@ app.get('/favoris/:user', cors(),function(req, res) {
   });
 })
 
-// /* commentaires */
-// app.post("/comments/:id", cors(), (req, res) => {
-//   const formData = req.body;
-//   const idUrl = req.params.id;
-
-//   connection.query("UPDATE comments SET ? WHERE games.id = ?", [formData, idUrl], (err, results) => {
-//     if (err) {
-//       res.status(500).send(err);
-//     } else {
-//       res.sendStatus(200);
-//     }
-//   });
-// });
 
 app.post("/fav", cors(), (req, res) => {
   

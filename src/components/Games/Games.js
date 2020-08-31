@@ -6,6 +6,7 @@ import SideBar from '../SideBar/SideBar';
 
 function Games () {
 
+/* GET TOP GAMES FROM API */
     const [games, setGames] = useState([])
 
     useEffect(() => {

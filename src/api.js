@@ -1,11 +1,15 @@
 import axios from 'axios';
 
+/* KEYS API TWITCH FORM .ENV */
 let api = axios.create({
     headers: {
-        'Client-ID': 'msqa4m7fnzhvv2d7a5lwea6q1vsmnp',
-        'Authorization': 'Bearer b0lpzxh1mbpqyr6p1j415bnb7c92p3'
+        'Client-ID': process.env.REACT_APP_API_CLIENT_ID,
+        'Authorization': process.env.REACT_APP_API_ATHORIZATION
+        
     }
 })
+
+export default api;
 
 /*
 
@@ -17,4 +21,3 @@ let api = axios.create({
 
 */
 
-export default api;

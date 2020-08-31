@@ -92,8 +92,8 @@ function Favoris (props) {
                 <div className="cardBodyGames"  >
                 <h4 className="titreCartesGamesName">{yo.name}</h4>
                   <h5 className="titreCartesGamesPrice">{yo.price}&nbsp;€</h5>
-                    <button onClick={()=> handleClick(yo)}>ADD ME IN YOUR FAV !</button>
-                    <button onClick={()=> handleClickDelete(yo)}>DELETE ME</button>
+                    {/* <button onClick={()=> handleClick(yo)}>ADD ME IN YOUR FAV !</button> */}
+                    <button className="button-remove" onClick={()=> handleClickDelete(yo)}>DELETE ME</button>
                 </div>
             </div>
          )

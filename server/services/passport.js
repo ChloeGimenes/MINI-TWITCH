@@ -1,4 +1,4 @@
-//On envoie le token ici, c'est un middleware pour Passport:
+//We send token here, it's a middleware for Passport:
 
 const passport = require('passport');
 const User = require("../models/user");
@@ -13,7 +13,7 @@ const jwtOptions = {
 };
 
 const jwtLogin = new JwtStrategy(jwtOptions, function(payload, done) {
-    const userId = payload.sub; //là où se trouve l'id
+    const userId = payload.sub; //where the id is
     User.findById(userId, function(err, user){
         if(err){
             return done(err, false)

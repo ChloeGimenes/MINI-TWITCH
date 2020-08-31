@@ -10,7 +10,7 @@ const cors = require('cors');
 mongoose.set('useCreateIndex', true);
 
 
-//Connection à la base de données créée sur MongoDB:
+//Connection to database in MongoDB:
 mongoose.connect('mongodb+srv://chloe:chloe@cluster0.tarb8.mongodb.net/cluster0?retryWrites=true&w=majority',
 { useNewUrlParser: true,
   useUnifiedTopology: true  }
@@ -20,7 +20,7 @@ mongoose.connection
     .on('error', error => console.log('Erreur de connection à MongoDB', error));
 
 
-//Connection au serveur:
+//Connection to server:
 expressServer.use(morgan('combined'));
 expressServer.use(bodyParser.json({type: '*/*'}));
 expressServer.use(cors({

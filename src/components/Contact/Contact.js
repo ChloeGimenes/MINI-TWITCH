@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import * as emailjs from 'emailjs-com';
+import Recaptcha from 'react-recaptcha';
+import logo3 from '../../redux/components/pictures/mario.png'
 
 
 class Contact extends Component {
@@ -9,9 +11,15 @@ class Contact extends Component {
       name: '',
       email: '',
       message: '',
+      isVerified: false,
 
     };
   }
+
+  recaptchaLoaded() {
+    console.log('captcha has loaded');
+  }
+
   handleSubmit = e => {
     e.preventDefault();
     const { name, email, message } = this.state;
@@ -21,10 +29,24 @@ class Contact extends Component {
       message_html: message,
     };
 
-    emailjs.send('gmail', 'template_f0X8fBD2', templateParams, 'user_2puqpCKuOLP7C2RXBLYZm');
+    emailjs.send('gmail', 'template_f0X8fBD2', templateParams, process.env.REACT_APP_EMAILJS);
     this.resetForm();
     
+    if (this.state.isVerified) {
+      alert('Message sent successfully !');
+    } else {
+      alert('Please verify that you are a human ! ')
+    }
   };
+
+  verifyCallback(response) {
+    if (response) {
+      this.setState({
+        isVerified : true
+      })
+    }
+  }
+
   resetForm() {
     this.setState({
       name: '',
@@ -36,12 +58,20 @@ class Contact extends Component {
   handleChange = (param, e) => {
     this.setState({ [param]: e.target.value });
   };
+
+ 
+ 
+
   render() {
+
     return (
       <div className="container-form-main">
      
-        
         <form className="container-form" onSubmit={this.handleSubmit.bind(this)}>
+          <div className="contact-logo-part">
+          <img src={logo3}  alt="mario" className="logo3"/>  
+          {/* <h2 className="contact-text"><i>Come say hi !</i></h2> */}
+        </div>
           <div className="contactform">
             <input
               type="text"
@@ -80,6 +110,14 @@ class Contact extends Component {
               >
                 SUBMIT
               </button>
+
+              <Recaptcha
+                sitekey={process.env.REACT_APP_RECAPTCHA}
+                render="explicit"
+                onloadCallback={this.recaptchaLoaded.bind(this)}
+                verifyCallback={this.verifyCallback.bind(this)}
+              />
+
             </div>
           </div>
         </form>

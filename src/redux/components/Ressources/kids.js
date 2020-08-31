@@ -145,8 +145,8 @@ function Kids (props) {
                         <div className="cardBodyGames" >
                           <h4 className="titreCartesGamesName">{kids.name}</h4>
                             <h5 className="titreCartesGamesPrice">{kids.price}&nbsp;€</h5> 
-                              <button onClick={()=> handleClickDelete(kids)} >DELETE ME</button>
-                              <button onClick={()=> handleClick(kids)}>ADD ME IN YOUR FAV !</button>
+                              {/* <button onClick={()=> handleClickDelete(kids)} >DELETE ME</button> */}
+                              <button className="button-add" onClick={()=> handleClick(kids)}>ADD ME!</button>
                         </div>
                     </div>
           

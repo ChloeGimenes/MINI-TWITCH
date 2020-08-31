@@ -23,8 +23,6 @@ function App(props) {
   return (
     
     <Router >
-    {/* forceRefresh={true}> */}
-
       <div className="App">
         <Header />
         <Errors />
@@ -42,7 +40,6 @@ function App(props) {
               <Route exact path="/signup" component={Signup} />
               <Route exact path="/contact" component={Contact} />
           </Switch>
-
       </div>
   </Router>
   );

@@ -192,8 +192,8 @@ useEffect(() => {
                       <div className="cardBodyGames" >
                           <h4 className="titreCartesGamesName">{gamed.name}</h4>
                           <h5 className="titreCartesGamesPrice">{gamed.price}&nbsp;€</h5>
-                          <button onClick={()=> handleClick(gamed)}>ADD ME IN YOUR FAV !</button>
-                          <button onClick={()=> handleClickDelete(gamed)} >DELETE ME</button>
+                          <button className="button-add" onClick={()=> handleClick(gamed)}>ADD ME!</button>
+                          {/* <button onClick={()=> handleClickDelete(gamed)} >DELETE ME</button> */}
                       </div>
                   </div>
                  )

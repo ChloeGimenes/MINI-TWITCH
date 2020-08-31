@@ -25,7 +25,7 @@ function Sidebar(){
             })
             // console.log(gameIDs, userIDs);
             
-            // Création des URLs personnalisés
+            // Creation of modified url
 
             let baseUrlGames = "https://api.twitch.tv/helix/games?";
             let baseUrlUsers = "https://api.twitch.tv/helix/users?";
@@ -45,7 +45,7 @@ function Sidebar(){
             let urlFinalUsers = baseUrlUsers + queryParamsUsers;
             // console.log(urlFinalGames);
 
-            // appel
+            // calls
             let gamesNames = await api.get(urlFinalGames);
             let getUsers = await api.get(urlFinalUsers);
 
@@ -54,7 +54,7 @@ function Sidebar(){
             // console.log(arrayUsers, gamesNameArray);
 
 
-            // création du tableau final
+            // create final array
             let finalArray = dataArray.map(stream => {
 
                 stream.gameName = "";
@@ -107,7 +107,7 @@ console.log(topStreams);
 
                         <div className="viewerRight">
 
-                        {/* <div className="pointRouge"></div> */}
+                        <div className="pointRouge"></div>
                         <div>{stream.viewer_count}</div>
 
                         </div>

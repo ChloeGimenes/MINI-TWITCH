@@ -4,6 +4,7 @@ const passport = require("passport");
 
 
 const requireToken = passport.authenticate("jwt", { session: false});
+
 const requireValidCredentials = passport.authenticate("local", {session: false});
 
 

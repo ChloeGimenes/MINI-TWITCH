@@ -17,11 +17,11 @@ function getTokenForUser(user){
 }
 
 exports.signup = function(req, res, next) {
-    //Récupération des paramètres qu'on nous envoie
+    //Get parameters that have been sent
     const email = req.body.email;
     const password = req.body.password;
 
-    //Rech ds base de donnée par mail:
+    //Researching in DataBase
     User.findOne({email: email}, function(err, existingUser) {
         if(err){
             return next(err)

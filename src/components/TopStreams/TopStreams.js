@@ -24,7 +24,7 @@ function TopStreams () {
             })
             // console.log(gameIDs, userIDs);
             
-            // Création des URLs personnalisés
+            // Creation of modified URL
 
             let baseUrlGames = "https://api.twitch.tv/helix/games?";
             let baseUrlUsers = "https://api.twitch.tv/helix/users?";
@@ -53,7 +53,7 @@ function TopStreams () {
             // console.log(arrayUsers, gamesNameArray);
 
 
-            // création du tableau final
+            // creation final array
             let finalArray = dataArray.map(stream => {
 
                 stream.gameName = "";
