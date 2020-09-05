@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { reduxForm, Field } from "redux-form";
 import * as actions from "../actions";
-import * as validations from "../../validations/index";
+import * as validations from "../../redux/validations/index";
 
 const FIELDS = {
   email: "email",

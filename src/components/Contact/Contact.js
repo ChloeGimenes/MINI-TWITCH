@@ -20,25 +20,6 @@ class Contact extends Component {
     console.log('captcha has loaded');
   }
 
-  handleSubmit = e => {
-    e.preventDefault();
-    const { name, email, message } = this.state;
-    let templateParams = {
-      from_name: email,
-      to_name: name,
-      message_html: message,
-    };
-
-    emailjs.send('gmail', 'template_f0X8fBD2', templateParams, process.env.REACT_APP_EMAILJS);
-    this.resetForm();
-    
-    if (this.state.isVerified) {
-      alert('Message sent successfully !');
-    } else {
-      alert('Please verify that you are a human ! ')
-    }
-  };
-
   verifyCallback(response) {
     if (response) {
       this.setState({
@@ -55,12 +36,37 @@ class Contact extends Component {
      
     });
   }
+
   handleChange = (param, e) => {
     this.setState({ [param]: e.target.value });
   };
 
- 
- 
+  handleSubmit = e => {
+
+    e.preventDefault();
+    
+    if (this.state.isVerified) {
+      alert('Message sent successfully !');
+
+      
+      const { name, email, message } = this.state;
+      let templateParams = {
+        from_name: email,
+        to_name: name,
+        message_html: message,
+      };
+
+      emailjs.send('gmail', 'template_f0X8fBD2', templateParams, process.env.REACT_APP_EMAILJS);
+      this.resetForm();
+
+    } else {
+
+      alert('Please verify that you are a human ! ')
+      
+    }
+   
+  }
+
 
   render() {
 
@@ -70,14 +76,13 @@ class Contact extends Component {
         <form className="container-form" onSubmit={this.handleSubmit.bind(this)}>
           <div className="contact-logo-part">
           <img src={logo3}  alt="mario" className="logo3"/>  
-          {/* <h2 className="contact-text"><i>Come say hi !</i></h2> */}
         </div>
           <div className="contactform">
             <input
               type="text"
               name="name"
               value={this.state.name}
-              className="text-primary"
+              className="text"
               onChange={this.handleChange.bind(this, 'name')}
               placeholder="NAME"
               required
@@ -87,14 +92,14 @@ class Contact extends Component {
               type="email"
               name="email"
               value={this.state.email}
-              className="text-primary"
+              className="text"
               onChange={this.handleChange.bind(this, 'email')}
               placeholder="EMAIL"
               required
             />
             
             <textarea
-              className="textarea text-primary"
+              className="textarea"
               type="text"
               name="message"
               value={this.state.message}
@@ -116,12 +121,11 @@ class Contact extends Component {
                 render="explicit"
                 onloadCallback={this.recaptchaLoaded.bind(this)}
                 verifyCallback={this.verifyCallback.bind(this)}
+                theme="dark"
               />
-
             </div>
           </div>
         </form>
-     
       </div>
     );
   }

@@ -6,3 +6,4 @@ export const GET_ALL_WISH = "GET_ALL_WISH";
 export const GET_ALL_GAMES = "GET_ALL_GAMES";
 export const ADD_WISHLIST = "ADD_WISHLIST";
 export const REMOVE_WISHLIST = "REMOVE_WISHLIST";
+export const TOGGLE_BUTTON_HIDE = "TOGGLE_BUTTON_HIDE";

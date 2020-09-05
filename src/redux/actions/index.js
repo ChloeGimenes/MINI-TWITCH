@@ -1,4 +1,4 @@
-import {REMOVE_WISHLIST, ADD_WISHLIST, GET_ALL_WISH, SET_AUTHENTICATION, INCREMENT_ACTION_COUNT, PARSE_ERROR, RESET_ERROR} from './action-types';
+import {TOGGLE_BUTTON_HIDE, REMOVE_WISHLIST, ADD_WISHLIST, GET_ALL_WISH, SET_AUTHENTICATION, INCREMENT_ACTION_COUNT, PARSE_ERROR, RESET_ERROR} from './action-types';
 import axios from "axios";
 // import { authorize } from 'passport';
 
@@ -38,6 +38,7 @@ export function signinUser({email, password}, history){
             dispatch(setAuthentication(true));
             history.push("/ressources");
             localStorage.setItem("email", email);
+            window.location.reload()
             
         }).catch((error) => {
             console.log(error);
@@ -67,7 +68,7 @@ export function signupUser({ email, password }, history) {
           dispatch(setAuthentication(true));
           history.push("/ressources");
           localStorage.setItem("email", email);
-
+          window.location.reload()
         
         })
         .catch(error => {
@@ -99,15 +100,29 @@ export function signupUser({ email, password }, history) {
      dispatch({
          type: ADD_WISHLIST,
          payload: payload.wish,
-        
-     })
+     });
+    //  return(
+    //         dispatch(toggleButtonHide(true))
+    //  )
  }
 
  export const deleteWishList = payload => async dispatch => {
      dispatch({
          type: REMOVE_WISHLIST,
          payload: payload.wish,
-        
-
      })
+//      return(
+//         dispatch(toggleButtonHide(false))
+//  )
  }
+
+ //* BUTTON ADD *//
+
+
+ export function toggleButtonHide(id) {
+    return {
+        type: TOGGLE_BUTTON_HIDE,
+        payload: id
+        }
+ 
+    };

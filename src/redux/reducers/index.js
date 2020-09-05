@@ -6,8 +6,6 @@ import ErrorsReducer from './errors';
 import wishListReducer from "./wishlist";
 
 
-
-
 const rootReducer = combineReducers({
 
     form,

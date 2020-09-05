@@ -1,21 +1,22 @@
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const mysql = require("mysql");
 const express = require('express');
-const { useParams } = require("react-router-dom");
-const UserModel = require("../server/models/user");
+const mysql = require("mysql");
 const app = express();
-// LocalStorage = require('node-localstorage').LocalStorage,
-// localStorage = new LocalStorage('./scratch');
 
+const dotenv = require("dotenv")
+dotenv.config();
+
+// SQL CONNEXION
 const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'chloe',
-  database: 'twitch',
+  host: process.env.HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASS,
+  database: process.env.DATABASE,
 });
 
 connection.connect(function(err) {
+  
   if(err) {
     // throw new err("oops something happened");
     console.log(typeof(err));
@@ -24,8 +25,10 @@ connection.connect(function(err) {
   } else {
     console.log('Node connected to mysql server')
   }
+  console.log(process.env.DB_USER)
 })
 
+// CONN PARAMS
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header('Access-Control-Allow-Methods', 'DELETE, PUT, GET, POST');
@@ -49,8 +52,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
-//*// ROUTES ///*//////////////////////////////////////
 
+//// GAMES //////////////////////////////////////
 
 /*RETRIEVE ALL GAMES*/
 app.get('/db', cors(),function(req, res) {
@@ -68,10 +71,11 @@ app.get('/db', cors(),function(req, res) {
   });
 })
 
+// CATEGORIES ////////////////////////////////////////
 
-/*RETRIEVE ALL KIDS CATEGORIE GAMES */
+// RETRIEVE ALL KIDS CATEGORIE CAT
 app.get('/kids', cors(),function(req, res) {
-  const idUrl = req.params.id;
+  
   connection.query("SELECT * FROM games_categories JOIN games on games.id = games_id WHERE categories_id = 1", function(err, results) {
   if (err) {
     // console.log('Error in the query');
@@ -85,7 +89,7 @@ app.get('/kids', cors(),function(req, res) {
   });
 })
 
-//*RETRIEVE ALL FIGHT CATEGORIE GAMES*/
+// RETRIEVE ALL FIGHT CAT
 app.get('/fights', cors(),function(req, res) {
  
   connection.query("SELECT * FROM games_categories JOIN games on games.id = games_id WHERE categories_id = 2", function(err, results) {
@@ -101,24 +105,9 @@ app.get('/fights', cors(),function(req, res) {
   });
 })
 
-/*RETRIEVE ALL ADVENTURE CATEGORIE GAMES*/
-app.get('/adv', cors(),function(req, res) {
-  const idUrl = req.params.id;
-  connection.query("SELECT games_id FROM games_categories WHERE categories_id = 3", function(err, results) {
-  if (err) {
-    // console.log('Error in the query');
-    // console.log("[mysql error]",err);
-    res.status(500).send(err);
+// FAV ///////////////////////////////////////
 
-  } else { 
-    res.json(results);
-    console.log('Successful query');
-   }
-  });
-})
-
-
-//*/ RETRIEVE ALL FAVORIS GAMES ///*/
+//RETRIEVE ALL FAV GAMES
 app.get('/favoris/:user', cors(),function(req, res) {
 
   const us = req.params.user;
@@ -138,10 +127,9 @@ app.get('/favoris/:user', cors(),function(req, res) {
   });
 })
 
-
+//ADD FAV
 app.post("/fav", cors(), (req, res) => {
-  
-    console.log(req.body);
+
   const formData = {
     user: req.body.user,
     games_id: req.body.games_id,
@@ -156,7 +144,7 @@ app.post("/fav", cors(), (req, res) => {
   });
 });
 
-/* Delete a game in fav */
+// DELETE FAV
 app.delete("/favd/:user/:id", cors(), (req, res) => {
 
   const formData = { 

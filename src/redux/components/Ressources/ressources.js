@@ -6,22 +6,21 @@ import Cat from './kids';
 import Fights from './fights';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
-import FontAwesome from 'react-fontawesome';
 import logo3 from '../pictures/twitchcat.png'
 
 
 function Ressources (props) {
 
-  // const {games} = props;
   
   const localStorageRes = localStorage.getItem("email");
-  const user = localStorageRes;
+
+  const { wish, added} = props;
+
+  console.log(wish, 'le wish')
   
   const [games, setAllGames] = useState([]);
-  // const [wish, setAllWish] = useState([]);
 
-
-  /* GET ALL GAMES */  
+  ////////* GET ALL GAMES *///////
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -49,7 +48,8 @@ function Ressources (props) {
     fetchData();
   }, []);
 
-/* GET ALL MY WISH */         
+
+////////* GET ALL MY WISH *///////        
 useEffect(() => {
       
   const fetchData = async () => {
@@ -57,7 +57,6 @@ useEffect(() => {
    const localStorageRes = localStorage.getItem("email");
    const user = localStorageRes;
   
-
    try{
      const results = await axios
     .get(`http://localhost:3040/favoris/${user}`,  { 
@@ -90,19 +89,19 @@ useEffect(() => {
     fetchData();
 }, []);
 
-// props.dispatch({
-//   type: 'GET_ALL_WISH',
-//   payload: wish
-// });
 
-
-  /* CLICK ADD FAVORIS */  
+  ////////* CLICK ADD FAVORIS *////////  
   const handleClick = async (gamed) => {
 
     props.dispatch({
       type: 'ADD_WISHLIST',
       payload: gamed,
     });
+
+    props.dispatch({
+      type: 'TOGGLE_BUTTON_HIDE',
+      payload: gamed.id
+    })
 
     console.log('add', localStorageRes, gamed.id)
 
@@ -111,28 +110,14 @@ useEffect(() => {
           user : localStorageRes,
           games_id : gamed.id,
         }
-        let res = await axios.post("http://localhost:3040/fav", body)
+        let res = await axios.post("http://localhost:3040/api/fav", body)
         let {data} = res.data;
+        return data;
+
     } catch (error) {
           console.log(error)
         };
     };
-   
-
-  /* CLICK DELETE FAVORIS */
-  const handleClickDelete = async (gamed) => {
-
-  try {
-      const user = localStorageRes
-      console.log('click', localStorageRes)
-      let res = await axios.delete(`http://localhost:3040/favd/${user}/${gamed.id}`)
-      let {data}= res.data
-
-    } catch (error) {
-      console.log(error)
-    }
-
-  };
 
 
   const responsive = {
@@ -157,6 +142,9 @@ useEffect(() => {
     height: '350px',
     width: '280px',
   }
+  
+  console.log(games, "games")
+  
 
 
         return (
@@ -186,15 +174,21 @@ useEffect(() => {
                 itemClass="carousel-item-padding-40-px"
               >
                 {games.map((gamed, index) => (
-  
+                  
                   <div className="cartesGamesWish" key={index}>
                     <img src={gamed.picture} alt="game pic" className="imgCarte" style={style}/>
                       <div className="cardBodyGames" >
                           <h4 className="titreCartesGamesName">{gamed.name}</h4>
                           <h5 className="titreCartesGamesPrice">{gamed.price}&nbsp;€</h5>
-                          <button className="button-add" onClick={()=> handleClick(gamed)}>ADD ME!</button>
-                          {/* <button onClick={()=> handleClickDelete(gamed)} >DELETE ME</button> */}
-                      </div>
+                        <button 
+                        className="button-add" 
+                        onClick={()=> handleClick(gamed)}
+                        style={{
+                          textDecoration: added ? 'display' : 'none'
+                        }}>
+                          ADD ME!
+                        </button>
+                     </div>
                   </div>
                  )
                )}
@@ -209,14 +203,17 @@ useEffect(() => {
   )
 }
 
-// const mapStateToProps = state => {
-//   return {
-//     wish: state.wish
-//   };
-// };
+
+const mapStateToProps = state => {
+  return {
+    wish: state.wish,
+    added: state.wish.added,
+    wishId: state.wish.id,
+  };
+};
 
 
-export default connect(null, null)(Ressources);
+export default connect(mapStateToProps)(Ressources);
 
 
 

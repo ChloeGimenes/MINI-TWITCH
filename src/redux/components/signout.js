@@ -22,7 +22,7 @@ class Signout extends Component {
                 </Link>
 
                 <h4 className="mt-5 signout-text"><i>A très bientôt sur votre catalogue !</i></h4>
-                <div><iframe src="https://gifer.com/embed/3w4" width="15%" height="270px" frameBorder="0" allowFullScreen></iframe></div><p><a href="https://gifer.com"></a></p>
+                <div><iframe src="https://gifer.com/embed/3w4" width="400px" height="300px" frameBorder="0" allowFullScreen></iframe></div>
             </div>
         );
     }
