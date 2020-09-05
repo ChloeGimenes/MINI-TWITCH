@@ -6,13 +6,15 @@ const router = require('./route');
 const http = require('http');
 const mongoose = require('mongoose');
 const cors = require('cors');
-require('dotenv').config();
+
 
 mongoose.set('useCreateIndex', true);
 
+const dotenv = require("dotenv")
+dotenv.config();
 
 //Connection to database in MongoDB:
-mongoose.connect(`mongodb+srv://${process.env.NODE_ENV_MONGODB}@cluster0.tarb8.mongodb.net/cluster0?retryWrites=true&w=majority`,
+mongoose.connect(`mongodb+srv://${process.env.MONGODB}@cluster0.tarb8.mongodb.net/cluster0?retryWrites=true&w=majority`,
 { useNewUrlParser: true,
   useUnifiedTopology: true  }
 );

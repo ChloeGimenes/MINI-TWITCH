@@ -794,6 +794,7 @@ select:focus {
   outline: none !important;
 }
 
+
 /* Change autocomplete styles in WebKit //////////////////////////*/
 
 input:-webkit-autofill,
@@ -819,27 +820,46 @@ select:-webkit-autofill:focus {
   .contactform input {
     min-width: 100%;
   }
+
+  .logo3 {
+
+    height: 20%;
+  }
 }
 
 @media screen and (max-width:559px) {
 
 .contactform {
   margin-bottom: 40%;
+  width: 95%
+
+}
+
+.container-form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 15%
 }
 
 .contactform input {
   padding: 0;
-  padding-bottom: 15%;
+  padding: 5%;
   font-size: 17px;
 }
 
 .contactform textarea {
 width: 100%;
-padding: 0;
+padding: 5%;
 margin: 30px;
 font-size: 17px;
 
 
+}
+
+.logo3 {
+  height: 170px;
+  margin-left: 60%;
+  
 }
 
 .button-send {

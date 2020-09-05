@@ -25,7 +25,7 @@ connection.connect(function(err) {
   } else {
     console.log('Node connected to mysql server')
   }
-  console.log(process.env.DB_USER)
+  
 })
 
 // CONN PARAMS
@@ -53,7 +53,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 
 
-//// GAMES //////////////////////////////////////
+//// GAMES ///////////////////
 
 /*RETRIEVE ALL GAMES*/
 app.get('/db', cors(),function(req, res) {
@@ -71,7 +71,7 @@ app.get('/db', cors(),function(req, res) {
   });
 })
 
-// CATEGORIES ////////////////////////////////////////
+// CATEGORIES /////////////////////
 
 // RETRIEVE ALL KIDS CATEGORIE CAT
 app.get('/kids', cors(),function(req, res) {
@@ -105,7 +105,7 @@ app.get('/fights', cors(),function(req, res) {
   });
 })
 
-// FAV ///////////////////////////////////////
+// FAV ///////////////////
 
 //RETRIEVE ALL FAV GAMES
 app.get('/favoris/:user', cors(),function(req, res) {

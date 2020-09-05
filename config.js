@@ -1,4 +1,7 @@
+const dotenv = require("dotenv")
+dotenv.config();
+
 module.exports = {
 
-    secret: "qdovoihzoegazdzefezgfgrzjoj'__(freà"
+    secret: process.env.SECRET
 }
