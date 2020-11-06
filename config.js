@@ -1,7 +1,5 @@
-const dotenv = require("dotenv")
-dotenv.config();
 
 module.exports = {
 
-    secret: process.env.SECRET
+    secret: process.env.REACT_APP_API_SECRET
 }

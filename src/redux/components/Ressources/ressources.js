@@ -15,8 +15,6 @@ function Ressources (props) {
   const localStorageRes = localStorage.getItem("email");
 
   const { wish, added} = props;
-
-  console.log(wish, 'le wish')
   
   const [games, setAllGames] = useState([]);
 
@@ -173,24 +171,29 @@ useEffect(() => {
                 dotListClass="custom-dot-list-style"
                 itemClass="carousel-item-padding-40-px"
               >
-                {games.map((gamed, index) => (
+                {games.map((gamed, index) => {
+                  const inTheBucket = wish.wish.filter(game => gamed.id === game.id);
+
+                return (
                   
                   <div className="cartesGamesWish" key={index}>
                     <img src={gamed.picture} alt="game pic" className="imgCarte" style={style}/>
                       <div className="cardBodyGames" >
                           <h4 className="titreCartesGamesName">{gamed.name}</h4>
                           <h5 className="titreCartesGamesPrice">{gamed.price}&nbsp;€</h5>
-                        <button 
-                        className="button-add" 
-                        onClick={()=> handleClick(gamed)}
-                        style={{
-                          textDecoration: added ? 'display' : 'none'
-                        }}>
-                          ADD ME!
-                        </button>
+                          {inTheBucket.length === 0 && <button 
+                              className="button-add" 
+                              onClick={()=> handleClick(gamed)}
+                              style={{
+                                textDecoration: added ? 'display' : 'none'
+                              }}>
+                                ADD ME!
+                              </button>
+                          }
                      </div>
                   </div>
                  )
+                }
                )}
                
             </Carousel>

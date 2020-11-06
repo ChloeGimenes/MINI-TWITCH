@@ -14,7 +14,7 @@ const dotenv = require("dotenv")
 dotenv.config();
 
 //Connection to database in MongoDB:
-mongoose.connect(`mongodb+srv://${process.env.MONGODB}@cluster0.tarb8.mongodb.net/cluster0?retryWrites=true&w=majority`,
+mongoose.connect('mongodb+srv://chloe:chloe@cluster0.tarb8.mongodb.net/cluster0?retryWrites=true&w=majority',
 { useNewUrlParser: true,
   useUnifiedTopology: true  }
 );

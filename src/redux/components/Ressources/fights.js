@@ -9,7 +9,7 @@ import 'react-multi-carousel/lib/styles.css';
 function Fights (props) {
   
     const [allFights, setAllFights] = useState([]);
-  
+    const { wish, added} = props;
     const localStorageRes = localStorage.getItem("email");
     const user = localStorageRes;
 
@@ -76,8 +76,7 @@ function Fights (props) {
         console.log('click', localStorageRes)
         let res = await axios.delete(`http://localhost:3040/favd/${user}/${fight.id}`)
         let {data}= res.data
-  
-        // refreshWisList();
+
   
       } catch (error) {
         console.log(error)
@@ -108,6 +107,7 @@ function Fights (props) {
         width: '280px',
       }
 
+     
     return (
 
         <div>
@@ -134,18 +134,29 @@ function Fights (props) {
         itemClass="carousel-item-padding-40-px"
       >
             
-                {allFights.map((fight, index) => (
-                    <div className="cartesGamesWish" key={index}>
+                {allFights.map((fight, index) => {
+                   const inTheBucket = wish.wish.filter(game => fight.id === game.id);
+                   
+                   return (
+
+                   <div className="cartesGamesWish" key={index}>
                             <img  src={fight.picture} alt="game pic" className="imgCarte" style={style} />
                         <div className="cardBodyGames" >
                           <h4 className="titreCartesGamesName">{fight.name}</h4>
                           <h5 className="titreCartesGamesPrice">{fight.price}&nbsp;€</h5>
-                          <button className="button-add" onClick={()=> handleClick(fight)}>ADD ME!</button>
-                          {/* <button onClick={()=> handleClickDelete(fight)} >DELETE ME</button> */}
+                          {inTheBucket.length === 0 && <button 
+                              className="button-add" 
+                              onClick={()=> handleClick(fight)}
+                              style={{
+                                textDecoration: added ? 'display' : 'none'
+                              }}>
+                                ADD ME!
+                              </button>
+                          }
                         </div>
                     </div>
           
-                ))}
+    )})}
                 
            </Carousel>
             
@@ -153,5 +164,13 @@ function Fights (props) {
     )
 
 }    
+const mapStateToProps = state => {
+  return {
+    wish: state.wish,
+    added: state.wish.added,
+    wishId: state.wish.id,
+  };
+};
 
-export default connect(null, null)(Fights)
+
+export default connect(mapStateToProps)(Fights);

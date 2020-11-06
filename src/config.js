@@ -1,4 +1,4 @@
 module.exports = {
 
-    secret: "qdovoihzoegazdzefezgfgrzjoj'__(freà"
+    secret: process.env.REACT_APP_API_SECRET
 }

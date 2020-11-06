@@ -10,12 +10,7 @@ const requireValidCredentials = passport.authenticate("local", {session: false})
 
 module.exports = function (expressServer) {
 
-        ///exemple test:
-        // expressServer.get('/', function(req, res, next) {
-
-        //     res.send({serverData: ["Gibson", "Ibanez", "Yamaha"]})
-        // });
-
+    
         expressServer.post('/signup', AuthenticationController.signup );
 
         expressServer.get("/ressources", requireToken, function(req, res){

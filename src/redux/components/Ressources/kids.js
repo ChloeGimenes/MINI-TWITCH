@@ -9,10 +9,9 @@ import FontAwesome from 'react-fontawesome';
 
 function Kids (props) {
 
-   
+    const { wish, added} = props;
     const [allKids, setAllKids] = useState([]);
     
-  
     const localStorageRes = localStorage.getItem("email");
     const user = localStorageRes;
 
@@ -76,8 +75,7 @@ function Kids (props) {
           console.log('click', localStorageRes)
           let res = await axios.delete(`http://localhost:3040/favd/${user}/${kids.id}`)
           let {data}= res.data
-    
-          // refreshWisList();
+  
     
         } catch (error) {
           console.log(error)
@@ -108,11 +106,6 @@ function Kids (props) {
         height: '350px',
         width: '280px',
       }
-    
-        // const wishId = Object.keys(wish).map((fav => (
-        //   wish[fav].map((yo, i) => yo.id ))));
-
-        //   console.log('KIDS WISH', wishId)
 
     return (
 
@@ -139,18 +132,31 @@ function Kids (props) {
         itemClass="carousel-item-padding-40-px"
       >
             
-                {allKids.map((kids, index) => (
+                {allKids.map((kids, index) => {
+
+                const inTheBucket = wish.wish.filter(game => kids.id === game.id);
+
+                return (
                     <div className="cartesGamesWish" key={index}>
                       <img src={kids.picture} alt="game pic" className="imgCarte" style={style}/>
                         <div className="cardBodyGames" >
                           <h4 className="titreCartesGamesName">{kids.name}</h4>
                             <h5 className="titreCartesGamesPrice">{kids.price}&nbsp;€</h5> 
-                              {/* <button onClick={()=> handleClickDelete(kids)} >DELETE ME</button> */}
-                              <button className="button-add" onClick={()=> handleClick(kids)}>ADD ME!</button>
+                            {inTheBucket.length === 0 && <button 
+                              className="button-add" 
+                              onClick={()=> handleClick(kids)}
+                              style={{
+                                textDecoration: added ? 'display' : 'none'
+                              }}>
+                                ADD ME!
+                              </button>
+                          }
                         </div>
                     </div>
           
-                ))}
+                 ) }
+                
+                )}
                 
            </Carousel> 
         </div>
@@ -161,7 +167,9 @@ function Kids (props) {
 
 const mapStateToProps = state => {
   return {
-    wish: state.wish
+    wish: state.wish,
+    added: state.wish.added,
+    wishId: state.wish.id,
   };
 };
 

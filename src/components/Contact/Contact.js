@@ -46,7 +46,7 @@ class Contact extends Component {
     e.preventDefault();
     
     if (this.state.isVerified) {
-      alert('Message sent successfully !');
+      alert('Message envoyé avec succés !');
 
       
       const { name, email, message } = this.state;
@@ -61,7 +61,7 @@ class Contact extends Component {
 
     } else {
 
-      alert('Please verify that you are a human ! ')
+      alert('Verifiez que vous êtes un humain ! ')
       
     }
    
@@ -84,7 +84,7 @@ class Contact extends Component {
               value={this.state.name}
               className="text"
               onChange={this.handleChange.bind(this, 'name')}
-              placeholder="NAME"
+              placeholder="NOM"
               required
             />
             
@@ -104,7 +104,7 @@ class Contact extends Component {
               name="message"
               value={this.state.message}
               onChange={this.handleChange.bind(this, 'message')}
-              placeholder="YOUR MESSAGE"
+              placeholder="MESSAGE"
               required
             />
             <div className="buttons-container">
